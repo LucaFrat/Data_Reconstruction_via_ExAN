@@ -1,0 +1,9 @@
+""" HyperParameters """
+
+
+NUM_EPOCHS = 1
+BATCH_SIZE_TRAIN = 32
+BATCH_SIZE_VAL = 32
+LEARNING_RATE = 0.01
+MOMENTUM = 0.5
+SHOW = False
