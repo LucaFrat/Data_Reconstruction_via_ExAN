@@ -36,7 +36,7 @@ To simplify the reproduction, we used a batch size of 8. According to the paper,
 During the implementation of B1, we faced some challenges due to ambiguous statements in the algorithm and made soft fixes on the run:
 
 **Algorithm B.1** Determine $\{(g_c^m)_\text{bar}\}_{c=1}^K$ for $m=1,\dots,M$.
-1. **Input**: The gradient of $W_H$, i.e., $G_H_\text{bar}$.
+1. **Input**: The gradient of $W_H$, i.e., $\bar{G_H}$.
 2. **Output**: Reconstructed labels $\{Y_1,\dots,Y_M\}$ and loss vectors $\{(g_{mc})_{c=1}^K\}_{m=1}^M$.
 3. Compute $r_c := \frac{[G_H]_c}{[G_H]_1}$ for every $c$ in $1,\dots,K$.
 4. Find all the disjoint index groups $\{I_m\}_{m=1}^M$ where $(r_2)_j$ is constant whenever $j \in I_m$. $M$ is hence the inferred batch size and $I_m$ is the index set of the exclusively activated neurons at the last ReLU layer.
