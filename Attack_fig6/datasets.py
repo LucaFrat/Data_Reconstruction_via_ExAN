@@ -1,7 +1,7 @@
 """ 
 Manage importing the correct Dataset
 """
-import constants as cons
+from Attack_fig6.constants import BATCH_SIZE_TRAIN, BATCH_SIZE_TEST
 import medmnist
 from medmnist import INFO, Evaluator
 from torch.utils.data import TensorDataset, DataLoader
@@ -19,7 +19,7 @@ def import_dataset(dataset_to_import):
     return train_loader, test_loader
 
 
-def import_RetinaMNIST():    
+def import_RetinaMNIST():
     """ RetinaMNIST """
 
     info = INFO['retinamnist']
@@ -32,38 +32,37 @@ def import_RetinaMNIST():
     test_dataset = DataClass(split='test', transform=data_transform, download=True)
 
     # encapsulate data into dataloader form
-    train_loader = data.DataLoader(dataset=train_dataset, batch_size=cons.batch_size_train, shuffle=True)
-    test_loader = data.DataLoader(dataset=test_dataset, batch_size=cons.batch_size_test, shuffle=False)
+    train_loader = data.DataLoader(dataset=train_dataset, batch_size=BATCH_SIZE_TRAIN, shuffle=True)
+    test_loader = data.DataLoader(dataset=test_dataset, batch_size=BATCH_SIZE_TEST, shuffle=False)
     return train_loader, test_loader
 
 
 def import_MNIST():
     """ MNIST """
     train_loader = DataLoader(
-        datasets.MNIST('/files/', 
-                        train=True, 
-                        download=True,
-                        transform=transforms.Compose([
-                            transforms.ToTensor()
-                            #  transforms.Normalize((0.1307,), (0.3081,))
-                            ])),
-                        batch_size=cons.BATCH_SIZE_TRAIN, 
-                        shuffle=True
-                                )
+        datasets.MNIST('/files/',
+                       train=True,
+                       download=True,
+                       transform=transforms.Compose([
+                           transforms.ToTensor()
+                           #  transforms.Normalize((0.1307,), (0.3081,))
+                       ])),
+        batch_size=BATCH_SIZE_TRAIN,
+        shuffle=True
+    )
     test_loader = DataLoader(
-        datasets.MNIST('/files/', 
-                        train=False, 
-                        download=True,
-                        transform=transforms.Compose([
-                            transforms.ToTensor()
-                            # transforms.Normalize((0.1307,), (0.3081,))
-                            ])),
-                        batch_size=cons.BATCH_SIZE_TEST, 
-                        shuffle=True
-                            )
+        datasets.MNIST('/files/',
+                       train=False,
+                       download=True,
+                       transform=transforms.Compose([
+                           transforms.ToTensor()
+                           # transforms.Normalize((0.1307,), (0.3081,))
+                       ])),
+        batch_size=BATCH_SIZE_TEST,
+        shuffle=True
+    )
     return train_loader, test_loader
 
 
 datasets_dict = {'retinamnist': import_RetinaMNIST,
                  'mnist': import_MNIST}
-

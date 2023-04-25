@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 import numpy as np
-import constants as cons
+import Attack_fig6.constants as cons
 from torchsummary import summary
 
 
@@ -44,7 +44,7 @@ def initialize_network(test_loader):
     criterion = nn.CrossEntropyLoss()
 
     if cons.SHOW:
-        summary(FCNet_512(*layer_dims), input_size=(in_size,))
+        summary(FCNet_512(*layer_dims).to(cons.DEVICE), input_size=(in_size,))
 
     return net_512, optimizer, criterion, layer_dims
 
@@ -60,7 +60,7 @@ def train(net, epoch, optimizer, criterion, train_loader, layer_dims):
     params = {}
 
     for batch_idx, (data, target) in enumerate(train_loader):
-        target = target.view(-1)
+        target = target.view(-1).to(torch.int64)
         optimizer.zero_grad()
         output = net(data)
         loss = criterion(output, target)

@@ -1,8 +1,8 @@
 """ Algorithms from pseudo-code """
 
-import constants as cons
+import Attack_fig6.constants as cons
+import Attack_fig6.helpers as helpers
 import numpy as np
-import helpers
 import random
 
 
